@@ -1,6 +1,48 @@
 /**
  * Created by Administrator on 2018/3/9.
  */
+(function(){
+    var doc = document;
+    var starting = false;
+    var Game = {
+        init: function(){
+            this.bindEvent();
+        },
+        initGame: function (){
+            var piece,
+                targets,
+                targets;
+            starting = true;
+            piece = [1, 2, 3, 4, 5, 6, 7, 8];
+            divIndex = [0,1, 2, 3, 4, 5, 6, 7, 8];
+            piece.sort(function(){ return 0.5 - Math.random() });
+            divIndex.sort(function(){ return 0.5 - Math.random() });
+            targets =  $(".img-piece").children('div');
+            for(var i=0; i<9; i++){
+                if(i>0){
+                    targets[divIndex[i]].className = "img-piece"+ piece[i-1];
+                }else{
+                    targets[divIndex[i]].remove();
+            }
+           }
+        },
+        bindEvent:function(){
+            var self = this;
+            $('#start').on('click',function(){
+                if(!starting){
+                    self.initGame();
+                }
+            })
+
+        }
+    }
+    return Game.init();
+}());
+
+
+
+
+
 var hour = 0,
     minute = 0,
     second = 0,
@@ -51,35 +93,6 @@ function resetTimer(){
 }
 
 
-function initGame(){
-    var piece,
-        targets,
-        doc,
-        targets;
-
-    piece = [1, 2, 3, 4, 5, 6, 7, 8];
-    divIndex = [0,1, 2, 3, 4, 5, 6, 7, 8];
-    piece.sort(function(){ return 0.5 - Math.random() });
-    divIndex.sort(function(){ return 0.5 - Math.random() });
-
-    targets =  $(".img-piece").children('div');
-    for(var i=0; i<9; i++){
-       if(i>0){
-           targets[divIndex[i]].className = "img-piece"+ piece[i-1];
-       }else{
-           targets[divIndex[i]].remove();
-       }
-    }
-
-    //for(targ in targets){
-    //    console.log()
-    //}
-    //for(var i = 0; i < 8; i++ ){
-    //    console.log(targets);
-    //
-    //    //console.log(targets);
-    //}
-}
 
 
 function moveImg(targetDiv){
@@ -92,7 +105,7 @@ function moveImg(targetDiv){
 
 
 $(function(){
-    initGame();
+    //initGame();
 
 })
 

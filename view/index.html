@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>拼图游戏</title>
     <script src="../js/jquery-3.2.1.js"></script>
-    <script src="../js/act.js"></script>
+
     <script src="../js/game-mover.js"></script>
     <link rel="stylesheet" href="../css/style.css"/>
 
@@ -63,31 +63,33 @@
 <footer>
 
 </footer>
+<script src="../js/act.js"></script>
 <script type="text/javascript">
+    $(function(){
+console.log($('#start'))
+    })
 
      var doc = document;
-     var st = doc.getElementById("start");
-     var stop = doc.getElementById("stop");
-     var reset = doc.getElementById("reset");
-
-     st.addEventListener('click',function(){
-          start("start");
-      });
-     stop.addEventListener('click',function(){
-         stopTimer();
-    });
-     stop.addEventListener('click',function(){
-         resetTimer();
-     });
+//     var st = doc.getElementById("start");
+//     var stop = doc.getElementById("stop");
+//     var reset = doc.getElementById("reset");
+//
+//     st.addEventListener('click',function(){
+//          start("start");
+//      });
+//     stop.addEventListener('click',function(){
+//         stopTimer();
+//    });
+//     stop.addEventListener('click',function(){
+//         resetTimer();
+//     });
 
      $(".img-game-box li").click(function(e){
-
          // 找出点击元素
          var theTarget = $(this);
          var Point = theTarget.index();
+         console.log(Point);
          var thisPoint  =  Number(Point);  //当前的位置
-
-
          GetDirection(thisPoint);
 
 //         var theClassName = "." + $(this).find('div').attr('class'); //点击的元素 盒子里面的图片元素
@@ -104,19 +106,18 @@
          var target,
              moverTarget;
 
-              target =$('.img-game-box').find('li');
-          console.log("888888888888")
-         targetClass = '.' + $('.img-game-box').find('li').eq(thisPoint).find('div').attr('class');
-         console.log(targetClass)
+         target =$('.img-game-box').find('li');
+         targetClass = '.' + $('.img-game-box').find('li').eq(thisPoint).find('div').attr('class');// 点击的对象类名
          var index;
-         if(thisPoint - 3 >= 0 && thisPoint -  3 < 9 && target.eq(thisPoint - 3).find('div').length == 0){
+         3
+         if(thisPoint - 3 >= 0 && thisPoint -  3 < 9 && target.eq(thisPoint - 3).find('div').length == 0){//向上移动
                 index = thisPoint - 3;
                 BoxMove(0,targetClass,index)
-         }else if(thisPoint - 1 >= 0 && thisPoint - 1 < 9 &&  target.eq(thisPoint - 1).find('div').length == 0 ){
+         }else if(thisPoint - 1 >= 0 && thisPoint - 1 < 9 &&  target.eq(thisPoint - 1).find('div').length == 0 && thisPoint%3 !=0 ){// 向左移动
              index = thisPoint - 1;
              console.log(targetClass)
              BoxMove(1,targetClass,index);
-         }else if(thisPoint + 1 >= 0 && thisPoint + 1 < 9 && target.eq(thisPoint + 1).find('div').length == 0 ){
+         }else if(thisPoint + 1 >= 0 && thisPoint + 1 < 9 && target.eq(thisPoint + 1).find('div').length == 0 && thisPoint%3 != 2){
              index =  thisPoint + 1;
              BoxMove(2,targetClass,index);
          }else if(thisPoint + 3 >= 0 && thisPoint + 3 < 9 && target.eq(thisPoint + 3).find('div').length == 0){
@@ -125,7 +126,6 @@
          }
 
      }
-
      function BoxMove(dir,target,index){
          switch(dir){
              case 0 :
@@ -170,7 +170,6 @@
 
      }
 
-//   var va  = setInterval("console.log('a')",1000);
 </script>
 </body>
 </html>
